@@ -1,0 +1,12 @@
+/* .container {
+    position: relative;
+} */
+
+.navbar-position {
+    position: sticky;
+    top: 0;
+}
+
+.outlet {
+    min-height: 77.3vh;
+}

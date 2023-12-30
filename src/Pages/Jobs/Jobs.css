@@ -1,0 +1,31 @@
+.job-card {
+    display: flex;
+    width: 80vw;
+    margin: 10px auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 10px;
+    border: 1px solid rgb(222, 222, 222);
+}
+
+.card-img {
+    width: 30%;
+    padding: 10px;
+}
+
+.card-img img {
+    width: 100%;
+}
+
+.job-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.422) 0px 1px 4px;
+    border: 1px solid rgb(182, 182, 182);
+}
+
+.card-contant {
+    width: 69%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px;
+
+}
