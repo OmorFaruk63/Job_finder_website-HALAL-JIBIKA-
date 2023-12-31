@@ -35,11 +35,11 @@
 }
 
 .navbar a:hover {
-    background-color: #555;
+    background-color: rgb(58, 153, 255);
 }
 
 .navbar .active {
-    background-color: #555;
+    background-color: rgb(58, 153, 255);
 }
 
 .bar {

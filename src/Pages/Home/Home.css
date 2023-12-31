@@ -2,27 +2,68 @@
     display: flex;
 }
 
+.contant {
+    margin: 50px auto;
+}
+
+.home-job {
+    color: #007bffff;
+}
+
 header {
     color: #333;
     padding: 10px;
     text-align: center;
 }
 
-section {
-    margin: 20px;
+.home-btn-contant {
+    text-align: center;
 }
 
 .home-btn {
     margin: 10px;
 }
 
-h1,
-h2 {
-    color: #333;
+.home-job-card-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-p {
-    line-height: 1.6;
+.home-job-card {
+    display: flex;
+    /* height: 350px; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.home-card-img img {
+    width: 70%;
+}
+
+.home-card-contant {
+    padding: 5px;
+    text-align: left;
+}
+
+.home-card-contant h2 {
+    font-size: 15px;
+    margin: 5px;
+}
+
+.home-card-contant p {
+    font-size: 10px;
+    margin: 5px;
+}
+
+.home-card-contant button {
+    width: 90%;
 }
 
 footer {
@@ -30,4 +71,25 @@ footer {
     color: white;
     padding: 20px;
     text-align: center;
+
+}
+
+@media (max-width:950px) {
+    .home-container .hero-img img {
+        width: 300px
+    }
+
+    .home-job-card-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media (max-width:550px) {
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 }

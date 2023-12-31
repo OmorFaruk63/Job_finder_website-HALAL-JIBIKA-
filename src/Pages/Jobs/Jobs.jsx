@@ -1,14 +1,12 @@
 import "./Jobs.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { useLoaderData } from "react-router-dom";
 const Jobs = () => {
-    const [data, setData] = useState([])
+    const jobs = useLoaderData()
+    const [data, setData] = useState(jobs?.data)
+    console.log(jobs.data);
 
-    useEffect(() => {
-        fetch("http://localhost:9000/jobs")
-            .then(res => res.json())
-            .then(data => setData(data))
-    }, [])
     return (
         <div>
             {

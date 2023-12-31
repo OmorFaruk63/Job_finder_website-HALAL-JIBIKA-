@@ -10,6 +10,7 @@ import About from "../Pages/About/About";
 import Jobs from "../Pages/Jobs/Jobs";
 import Error from "../Pages/Error/Error";
 import JobAdd from "../Pages/Job Add/JobAdd";
+import axios from "axios";
 
 
 
@@ -22,11 +23,13 @@ export const routes = createBrowserRouter(
             children: [
                 {
                     path: "/",
-                    element: <Home />
+                    element: <Home />,
+                    loader: async () => await axios.get("http://localhost:9000/jobs")
                 },
                 {
                     path: "/jobs",
-                    element: <Jobs />
+                    element: <Jobs />,
+                    loader: async () => await axios.get("http://localhost:9000/jobs")
                 },
                 {
                     path: "/jobAdd",

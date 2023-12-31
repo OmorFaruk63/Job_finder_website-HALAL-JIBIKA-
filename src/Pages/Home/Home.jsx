@@ -1,30 +1,46 @@
-import { Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 import "./Home.css"
+import { useState } from "react"
+import { FaLocationDot } from "react-icons/fa6"
 const Home = () => {
+
+    const jobs = useLoaderData()
+    const [data, setData] = useState(jobs?.data)
+    console.log(jobs.data);
+
     return (
         <div className="home-container">
             <div className="contant">
                 <header>
-                    <h1>Find Your Dream Job Today!</h1>
+                    <h1>Find Your Dream <span className="home-job">Job</span>  Today!</h1>
+                </header>
+                <div className="home-btn-contant">
                     <Link to={"/jobs"}>
                         <button className="home-btn">
-                            Search for jobs now! </button>
+                            Explore Now! </button>
                     </Link>
 
                     <Link to={"/JobAdd"}>
                         <button className="home-btn">Hiring Employee</button>
                     </Link>
-                </header>
-                <section>
-                    <p>Welcome to Halal Jibika, your one-stop shop for finding your dream job. We believe everyone deserves a career they love, and we're here to help you make it happen.</p>
-                    <p>
-                        A diverse group of people in all different work settings are smiling and looking confident. They should represent the variety of jobs your website features
-                    </p>
-                    <h2>Why Choose Us?</h2>
-                    <p>We're the fastest-growing job board: More and more companies are posting their jobs with us every day.
-                        We're committed to diversity and inclusion: We believe everyone deserves an equal opportunity to find a great job.
-                        We're passionate about helping people: We're here to support you every step of the way in your job search.
-                        Ready to get started?</p>
+                </div>
+                <section className="home-job-card-container">
+                    {
+                        data.slice(8).map(data => (
+                            <div key={data?.id} className="home-job-card">
+                                <div className="home-card-img">
+                                    <img width={"150px"} src={data.logo} />
+                                </div>
+                                <div className="home-card-contant">
+                                    <h2>{data?.title}</h2>
+                                    <hp>CompanyName: {data?.companyName}</hp>
+                                    <p>Position: {data?.position}</p>
+                                    <p><FaLocationDot /> Work from anywhere.</p>
+                                    <button>View Job</button>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </section>
             </div>
             <div className="hero-img">
