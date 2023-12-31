@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react"
 import { context } from "../../context/Global/GlobalContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const EditeJob = () => {
     const { edit } = useContext(context)
+    const navigate = useNavigate()
     const [input, setInput] = useState({
         title: edit.title,
         logo: edit.logo,
@@ -11,7 +14,7 @@ const EditeJob = () => {
         position: edit.position,
         description: edit.description,
     })
-    console.log(edit.id);
+
     function handleChange(e) {
         const { name, value } = e.target;
         setInput((prev) => ({
@@ -21,9 +24,12 @@ const EditeJob = () => {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        axios.put("http://localhost:9000/jobs", input)
-            .then((res) => console.log(res))
-            .catch((error) => console.log(error))
+        axios.put(`http://localhost:9000/jobs/${edit.id}`, input)
+            .then((res) => {
+                toast.success("Edite Successful")
+                navigate(-1)
+            })
+            .catch((error) => toast.error(error.message))
     }
     return (
         <div><div className="signup-container">

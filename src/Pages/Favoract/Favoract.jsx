@@ -7,7 +7,7 @@ const Favoract = () => {
     const { favoract } = useContext(context)
     const { data } = useLoaderData()
     const filterData = data?.filter(job => favoract.includes(job.id))
-    console.log(filterData);
+
     return (
         <div>{filterData.length > 0 ?
             filterData?.map(data => (

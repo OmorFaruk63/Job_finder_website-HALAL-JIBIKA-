@@ -1,12 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import "./Navbar.css"
 import { auth } from "../../Firebase/Firebase";
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 const Navbar = () => {
     const [user, loading] = useAuthState(auth);
+    const navigate = useNavigate();
     const [signOut] = useSignOut(auth);
     const [isTrue, setTrue] = useState(false);
     useEffect(() => {
@@ -16,6 +18,15 @@ const Navbar = () => {
     function handleSingout() {
         signOut()
     }
+    function handleNavigate() {
+        if (user) {
+            navigate("/jobs")
+        } else {
+            navigate("/singup")
+            toast("Please sign up first.")
+        }
+
+    }
 
     return (
         <div>
@@ -23,7 +34,8 @@ const Navbar = () => {
                 <img className="main-logo" width="50px" src="../../../public/logo-Main.jpg" />
                 <ul onClick={() => setTrue(!isTrue)} className={isTrue ? "nav-manu-active nav-manu" : "nav-manu"}>
                     <NavLink to="/"><li>Home</li></NavLink>
-                    <NavLink to="/jobs"> <li>Jobs</li></NavLink>
+                    <NavLink onClick={handleNavigate} to="/jobs"> <li>Jobs</li></NavLink>
+
                     <NavLink to="/about">  <li>About</li></NavLink>
                     <NavLink to="/contact"> <li>Contact</li></NavLink>
                     <NavLink to="/favorite"> <li>Favorite</li></NavLink>
