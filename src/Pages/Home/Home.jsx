@@ -1,24 +1,40 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData, useNavigate } from "react-router-dom"
 import "./Home.css"
 import { useState } from "react"
 import { FaLocationDot } from "react-icons/fa6"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "../../Firebase/Firebase"
+import { ToastContainer, toast } from 'react-toastify';
 const Home = () => {
 
     const jobs = useLoaderData()
     const [data, setData] = useState(jobs?.data)
     console.log(jobs.data);
 
+    const navigate = useNavigate()
+    const [user] = useAuthState(auth);
+    function handleNavigate() {
+
+        if (user) {
+            navigate('/jobs')
+        } else {
+            navigate('/singup')
+            toast("Please sign up first.")
+        }
+    }
+
     return (
         <div className="home-container">
+
             <div className="contant">
                 <header>
                     <h1>Find Your Dream <span className="home-job">Job</span>  Today!</h1>
                 </header>
                 <div className="home-btn-contant">
-                    <Link to={"/jobs"}>
-                        <button className="home-btn">
-                            Explore Now! </button>
-                    </Link>
+
+                    <button onClick={handleNavigate} className="home-btn">
+                        Explore Now!
+                    </button>
 
                     <Link to={"/JobAdd"}>
                         <button className="home-btn">Hiring Employee</button>

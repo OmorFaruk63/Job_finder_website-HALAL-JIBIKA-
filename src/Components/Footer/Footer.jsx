@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Footer.css"
 const Footer = () => {
     return (
@@ -6,11 +7,11 @@ const Footer = () => {
             <footer className="footer">
 
                 <div className="footer-links">
-                    <a href="/">Home</a>
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact</a>
-                    <a href="/terms">Terms of Service</a>
-                    <a href="/privacy">Privacy Policy</a>
+                    <Link to={"/"}>Home</Link>
+                    <Link to={"/about"}>About</Link>
+                    <Link to={"/contact"}>Contact</Link>
+                    <Link>Terms of Service</Link>
+                    <Link>Privacy Policy</Link>
                 </div>
                 <div className="footer-social">
                     <a href="#" target="_blank" rel="noopener noreferrer">

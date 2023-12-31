@@ -1,11 +1,10 @@
 import "./Jobs.css"
 import { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 const Jobs = () => {
     const jobs = useLoaderData()
     const [data, setData] = useState(jobs?.data)
-    console.log(jobs.data);
 
     return (
         <div>
@@ -21,7 +20,7 @@ const Jobs = () => {
                             <p>Position: {data?.position}</p>
                             <p>Description: {data?.description}</p>
                             <p><FaLocationDot /> Work from anywhere.</p>
-                            <button>View Job</button>
+                            <Link to={`/jobs/${data?.id}`}><button>View Job </button></Link>
                         </div>
                     </div>
                 ))

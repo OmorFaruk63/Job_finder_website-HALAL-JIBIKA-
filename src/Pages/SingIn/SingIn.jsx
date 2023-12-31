@@ -6,7 +6,7 @@ import { auth } from "../../Firebase/Firebase";
 import { useSignInWithGoogle, useSignInWithGithub, useAuthState } from
     'react-firebase-hooks/auth';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const SingIn = () => {
 
     const [email, setEmail] = useState('');
@@ -38,9 +38,13 @@ const SingIn = () => {
 
     const [user] = useAuthState(auth);
     console.log(error?.message);
-    if (user) {
-        navigate('/')
-    }
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user])
+
 
     return (
         <div>
