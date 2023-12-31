@@ -38,7 +38,15 @@
     display: none;
 }
 
+.navbar-img {
+    display: flex;
+    align-items: center;
+    color: white;
+}
 
+.navbar-img img {
+    border-radius: 50%;
+}
 
 /* Media query for responsiveness */
 @media (max-width: 600px) {

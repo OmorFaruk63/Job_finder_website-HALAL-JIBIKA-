@@ -19,10 +19,10 @@ const SingIn = () => {
     function handleGithub() {
         signInWithGithub()
     }
-    console.log(GithubUser, GithubError?.message);
-    function handleSubmit() {
 
+    function handleSubmit() {
     }
+
     return (
         <div>
             <div className="signin-container">
