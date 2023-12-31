@@ -19,7 +19,7 @@ const Singup = () => {
 
     const navigate = useNavigate()
     const [user, loading, error] = useAuthState(auth);
-    console.log(user);
+
     if (user) {
         navigate('/singin')
     }

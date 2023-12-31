@@ -29,3 +29,9 @@
     padding: 10px;
 
 }
+
+.card-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

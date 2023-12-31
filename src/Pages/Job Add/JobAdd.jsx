@@ -1,7 +1,28 @@
+import axios from "axios";
+import { useState } from "react"
 
 const JobAdd = () => {
-    function handleSubmit() {
+    const [input, setInput] = useState({
+        title: "",
+        logo: "",
+        companyName: "",
+        position: "",
+        description: "",
+    })
 
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setInput((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    }
+    function handleSubmit(e) {
+        e.preventDefault();
+        // console.log(input);
+        // axios.post("http://localhost:9000/jobs", input)
+        //     .then((res) => console.log(res))
+        //     .catch((error) => console.log(error))
     }
     return (
         <div><div className="signup-container">
@@ -10,44 +31,44 @@ const JobAdd = () => {
                 <label htmlFor="username">Job Title:</label>
                 <input
                     type="text"
-                    name="username"
-                    // value={formData.username}
-                    // onChange={handleChange}
+                    name="title"
+                    value={input.title}
+                    onChange={handleChange}
                     required
                 />
-                <label htmlFor="username">Job
-                    logo:</label>
+                <label htmlFor="imageURL">Job
+                    logo:(Image URL)</label>
                 <input
                     type="text"
-                    name="username"
-                    // value={formData.username}
-                    // onChange={handleChange}
+                    name="logo"
+                    value={input.logo}
+                    onChange={handleChange}
                     required
                 />
-                <label htmlFor="username">CompanyName:</label>
+                <label htmlFor="companyName">CompanyName:</label>
                 <input
                     type="text"
-                    name="username"
-                    // value={formData.username}
-                    // onChange={handleChange}
+                    name="companyName"
+                    value={input.companyName}
+                    onChange={handleChange}
                     required
                 />
 
-                <label htmlFor="email">Position:</label>
+                <label htmlFor="position">Position:</label>
                 <input
                     type="text"
-                    name="email"
-                    // value={formData.email}
-                    // onChange={handleChange}
+                    name="position"
+                    value={input.position}
+                    onChange={handleChange}
                     required
                 />
 
                 <label htmlFor="password">Description:</label>
                 <input
                     type="text"
-                    name="password"
-                    // value={formData.password}
-                    // onChange={handleChange}
+                    name="description"
+                    value={input.description}
+                    onChange={handleChange}
                     required
                 />
 

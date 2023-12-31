@@ -1,11 +1,12 @@
 import "./Jobs.css"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link, useLoaderData } from "react-router-dom";
+import { context } from "../../context/Global/GlobalContext";
 const Jobs = () => {
     const jobs = useLoaderData()
     const [data, setData] = useState(jobs?.data)
-
+    const { handleFavorite } = useContext(context)
     return (
         <div>
             {
@@ -20,7 +21,10 @@ const Jobs = () => {
                             <p>Position: {data?.position}</p>
                             <p>Description: {data?.description}</p>
                             <p><FaLocationDot /> Work from anywhere.</p>
-                            <Link to={`/jobs/${data?.id}`}><button>View Job </button></Link>
+                            <div className="card-btn">
+                                <Link to={`/jobs/${data?.id}`}><button>View Job </button></Link>
+                                <button onClick={() => handleFavorite(data?.id)}>  Add to favorite</button>
+                            </div>
                         </div>
                     </div>
                 ))

@@ -1,10 +1,16 @@
 /* eslint-disable react/prop-types */
-import { createContext } from "react"
+import { createContext, useState } from "react"
 
 export const context = createContext()
 const GlobalContext = ({ children }) => {
+
+    const [favoract, setFavoract] = useState([])
+    function handleFavorite(id) {
+        setFavoract([...favoract, id])
+    }
+
     return (
-        <context.Provider value={"hello"}>
+        <context.Provider value={{ favoract, setFavoract, handleFavorite }}>
             {children}
         </context.Provider>
     )

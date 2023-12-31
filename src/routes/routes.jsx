@@ -4,7 +4,7 @@ import App from "../App";
 import Home from "../Pages/Home/Home";
 import Singup from "../Pages/SingUp/Singup";
 import SingIn from "../Pages/SingIn/SingIn";
-import Favorite from "../Pages/Favorite/Favorite";
+import Favorite from "../Pages/Favoract/Favoract";
 import Contact from "../Pages/Contact/Contact";
 import About from "../Pages/About/About";
 import Jobs from "../Pages/Jobs/Jobs";
@@ -51,7 +51,8 @@ export const routes = createBrowserRouter(
                 },
                 {
                     path: "/favorite",
-                    element: <Favorite />
+                    element: <Favorite />,
+                    loader: async () => await axios.get("http://localhost:9000/jobs")
                 },
                 {
                     path: "/contact",
