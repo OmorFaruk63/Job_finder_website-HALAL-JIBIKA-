@@ -4,11 +4,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import "./Navbar.css"
 import { auth } from "../../Firebase/Firebase";
 import { useSignOut } from 'react-firebase-hooks/auth';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Navbar = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const [signOut] = useSignOut(auth);
     const [isTrue, setTrue] = useState(false);
+    useEffect(() => {
+    }, [user])
 
     //Sing out Function
     function handleSingout() {
@@ -31,7 +33,7 @@ const Navbar = () => {
                     </>}
                 </ul>
                 <div className="navbar-img">
-                    <img width={"30px"} src={user ? user?.photoURL :
+                    <img width={"30px"} src={user?.photoURL ? user?.photoURL :
                         "https://st3.depositphotos.com/19428878/37071/v/450/depositphotos_370714622-stock-illustration-businessman-icon-vector-male-avatar.jpg"} />
                     <span>{loading ? "Loading" : user ? user?.displayName : "profile Name"}</span>
                 </div>

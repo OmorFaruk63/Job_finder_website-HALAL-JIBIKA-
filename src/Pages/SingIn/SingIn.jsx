@@ -12,7 +12,7 @@ const SingIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [
-        signInWithEmailAndPassword,
+        signInWithEmailAndPassword, load, error
     ] = useSignInWithEmailAndPassword(auth);
 
     //google Auth 
@@ -29,14 +29,15 @@ const SingIn = () => {
         signInWithGithub()
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        signInWithEmailAndPassword(email, password)
+        await signInWithEmailAndPassword(email, password)
     }
 
     const navigate = useNavigate()
 
     const [user] = useAuthState(auth);
+    console.log(error?.message);
     if (user) {
         navigate('/')
     }

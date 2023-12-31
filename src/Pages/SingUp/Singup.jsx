@@ -3,24 +3,31 @@ import "./SingUp.css"
 import { useAuthState, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useState } from "react";
 import { auth } from "../../Firebase/Firebase";
+import { useUpdateProfile } from 'react-firebase-hooks/auth';
+
 const Singup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [comfirmPassword, setComfirmPassword] = useState('');
+
+    const [updateProfile] = useUpdateProfile(auth);
+
     const [
         createUserWithEmailAndPassword,
     ] = useCreateUserWithEmailAndPassword(auth);
 
     const navigate = useNavigate()
     const [user, loading, error] = useAuthState(auth);
+    console.log(user);
     if (user) {
-        navigate('/')
+        navigate('/singin')
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        createUserWithEmailAndPassword(email, password)
+        await createUserWithEmailAndPassword(email, password)
+        await updateProfile({ displayName: name })
         setComfirmPassword("")
         setPassword("")
         setEmail("")
