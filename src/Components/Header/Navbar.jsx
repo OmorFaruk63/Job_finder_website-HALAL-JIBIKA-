@@ -22,7 +22,7 @@ const Navbar = () => {
     if (user) {
       navigate("/jobs");
     } else {
-      navigate("/singup");
+      navigate("/signup");
       toast("Please sign up first.");
     }
   }

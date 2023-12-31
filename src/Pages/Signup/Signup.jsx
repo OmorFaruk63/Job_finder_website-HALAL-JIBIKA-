@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./SingUp.css";
+import "./Signup.css";
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
