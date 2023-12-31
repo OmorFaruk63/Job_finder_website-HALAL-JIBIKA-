@@ -12,6 +12,7 @@ import Error from "../Pages/Error/Error";
 import JobAdd from "../Pages/Job Add/JobAdd";
 import axios from "axios";
 import JobsDetails from "../Pages/Jobs/JobsDetails";
+import EditeJob from "../Pages/EditeJob/EditeJob.jsx";
 
 
 
@@ -40,6 +41,10 @@ export const routes = createBrowserRouter(
                 {
                     path: "/jobAdd",
                     element: <JobAdd />
+                },
+                {
+                    path: "/editeJob",
+                    element: <EditeJob />
                 },
                 {
                     path: "/singup",
