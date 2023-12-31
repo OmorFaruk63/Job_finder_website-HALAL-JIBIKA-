@@ -1,6 +1,6 @@
 
-
 const About = () => {
+
     return (
         <div>
             <h2>
