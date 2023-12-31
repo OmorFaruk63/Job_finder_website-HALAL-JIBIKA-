@@ -1,10 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SingIn.css"
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { auth } from "../../Firebase/Firebase";
-import { useSignInWithGoogle, useSignInWithGithub } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithGithub, useAuthState } from
+    'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useState } from "react";
 const SingIn = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [
+        signInWithEmailAndPassword,
+    ] = useSignInWithEmailAndPassword(auth);
 
     //google Auth 
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -20,7 +29,16 @@ const SingIn = () => {
         signInWithGithub()
     }
 
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault()
+        signInWithEmailAndPassword(email, password)
+    }
+
+    const navigate = useNavigate()
+
+    const [user] = useAuthState(auth);
+    if (user) {
+        navigate('/')
     }
 
     return (
@@ -31,10 +49,8 @@ const SingIn = () => {
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"
-                        id="email"
-                        name="email"
-                        // value={formData.email}
-                        // onChange={handleChange}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
 
@@ -43,8 +59,8 @@ const SingIn = () => {
                         type="password"
                         id="password"
                         name="password"
-                        // value={formData.password}
-                        // onChange={handleChange}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                     <button type="submit">Sign In</button>

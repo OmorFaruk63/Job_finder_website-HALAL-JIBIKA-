@@ -5,8 +5,14 @@ const Home = () => {
         <div>
             <header>
                 <h1>Find Your Dream Job Today!</h1>
-                <button className="home-btn"><Link to={"/jobs"}>Search for jobs now!</Link> </button>
-                <button className="home-btn"><Link to={"/JobAdd"}> Hiring Employee</Link></button>
+                <Link to={"/jobs"}>
+                    <button className="home-btn">
+                        Search for jobs now! </button>
+                </Link>
+
+                <Link to={"/JobAdd"}>
+                    <button className="home-btn">Hiring Employee</button>
+                </Link>
             </header>
             <section>
                 <p>Welcome to Halal Jibika, your one-stop shop for finding your dream job. We believe everyone deserves a career they love, and we're here to help you make it happen.</p>
