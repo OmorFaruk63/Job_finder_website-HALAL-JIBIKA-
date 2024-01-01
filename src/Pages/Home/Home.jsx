@@ -1,21 +1,21 @@
 // Importing necessary dependencies and styles
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../Firebase/Firebase";
 import { toast } from "react-toastify";
-import "./Home.css"; // Assuming this is the style file for Home component
+import "./Home.css";
+import { context } from "../../context/Global/GlobalContext";
+import useFetch from "../../Hook/useFetch";
 
-// Functional component definition
 const Home = () => {
-  // Fetching job data using useLoaderData hook
-  const jobs = useLoaderData();
-  const [data, setData] = useState(jobs?.data);
+  const { user } = useContext(context);
 
   // Navigation setup
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
+
+  const { data, loading, error } = useFetch("http://localhost:9000/jobs");
+
+  const [currentData, setCurrentData] = useState(data);
 
   // Function to handle navigation and show a toast if not signed up
   function handleNavigate() {

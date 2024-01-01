@@ -1,30 +1,29 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { useAuthState } from "react-firebase-hooks/auth";
 import "./Navbar.css";
 import { auth } from "../../Firebase/Firebase";
 import { useSignOut } from "react-firebase-hooks/auth";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { context } from "../../context/Global/GlobalContext";
 const Navbar = () => {
-  const [user, loading] = useAuthState(auth);
+  const { user, loading } = useContext(context);
   const navigate = useNavigate();
   const [signOut] = useSignOut(auth);
   const [isTrue, setTrue] = useState(false);
-  useEffect(() => {}, [user]);
-  console.log(user);
+
   //Sing out Function
   function handleSingout() {
     signOut();
   }
 
   function handleNavigate() {
-    if (user) {
-      navigate("/jobs");
-    } else {
-      navigate("/signup");
-      toast("Please sign up first.");
-    }
+    // if (user) {
+    //   navigate("/jobs");
+    // } else {
+    //   navigate("/signup");
+    //   toast("Please sign up first.");
+    // }
   }
 
   return (
@@ -42,9 +41,8 @@ const Navbar = () => {
           <NavLink to="/">
             <li>Home</li>
           </NavLink>
-          <NavLink onClick={handleNavigate} to="/jobs">
-            {" "}
-            <li>Jobs</li>
+          <NavLink to="/jobs">
+            <li onClick={handleNavigate}>Jobs</li>
           </NavLink>
 
           <NavLink to="/about">
@@ -52,11 +50,9 @@ const Navbar = () => {
             <li>About</li>
           </NavLink>
           <NavLink to="/contact">
-            {" "}
             <li>Contact</li>
           </NavLink>
           <NavLink to="/favorite">
-            {" "}
             <li>Favorite</li>
           </NavLink>
           {user ? (
@@ -65,9 +61,9 @@ const Navbar = () => {
             </NavLink>
           ) : (
             <>
-              <NavLink to="/singup">
+              <NavLink to="/signup">
                 {" "}
-                <li> Signup</li>
+                <li> Sign up</li>
               </NavLink>
               <NavLink to="/SingIn">
                 {" "}

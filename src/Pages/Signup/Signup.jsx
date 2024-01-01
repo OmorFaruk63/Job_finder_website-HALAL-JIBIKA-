@@ -1,9 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Signup.css";
-import {
-  useAuthState,
-  useCreateUserWithEmailAndPassword,
-} from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { auth } from "../../Firebase/Firebase";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
@@ -18,9 +15,6 @@ const Singup = () => {
 
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
-
-  const navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
 
   async function handleSubmit(e) {
     e.preventDefault();

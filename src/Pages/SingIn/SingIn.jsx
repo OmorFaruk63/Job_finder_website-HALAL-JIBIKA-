@@ -6,27 +6,25 @@ import { auth } from "../../Firebase/Firebase";
 import {
   useSignInWithGoogle,
   useSignInWithGithub,
-  useAuthState,
 } from "react-firebase-hooks/auth";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { context } from "../../context/Global/GlobalContext";
+
 const SingIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signInWithEmailAndPassword, load, error] =
-    useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 
   //google Auth
-  const [signInWithGoogle, googleUser, googleLoading, googleError] =
-    useSignInWithGoogle(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
 
   function handleGoogle() {
     signInWithGoogle();
   }
 
   //Github Auth
-  const [signInWithGithub, GithubUser, GithubLoading, GithubError] =
-    useSignInWithGithub(auth);
+  const [signInWithGithub] = useSignInWithGithub(auth);
 
   function handleGithub() {
     signInWithGithub();
@@ -39,14 +37,13 @@ const SingIn = () => {
 
   const navigate = useNavigate();
 
-  const [user] = useAuthState(auth);
-  console.log(error?.message);
+  const { user } = useContext(context);
 
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user]);
+  console.log("SingIn");
+
+  if (user) {
+    return navigate("/");
+  }
 
   return (
     <div>

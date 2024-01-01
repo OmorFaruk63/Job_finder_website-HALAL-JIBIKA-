@@ -1,48 +1,43 @@
 // Importing necessary dependencies and styles
-import React, { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { context } from "../../context/Global/GlobalContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../Firebase/Firebase";
 import "./Jobs.css"; // Assuming this is the style file for Jobs component
+import useFetch from "../../Hook/useFetch";
 
 // Functional component definition
 const Jobs = () => {
-  // Fetching job data using useLoaderData hook
-  const jobs = useLoaderData();
-
   // Destructuring values from the context and state
-  const { setEdit, handleFavorite } = useContext(context);
-  const [data, setData] = useState(jobs?.data);
-  const [count, setCount] = useState(jobs?.data);
+  const { setEdit, handleFavorite, user } = useContext(context);
 
   // Geting user authentication status
-  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
+  const { data, loading, error } = useFetch("http://localhost:9000/jobs");
+  const [currentData, setCurrentData] = useState(data);
+
+  useEffect(() => {
+    setCurrentData(data);
+  }, [data]);
+
   // Redirecting based on user authentication status
-  if (user) {
-    navigate("/jobs");
-  } else {
+  if (!user) {
     navigate("/signup");
   }
 
   // Handling job deletion
   function handleDeleteJob(id) {
-    axios
-      .delete(`http://localhost:9000/jobs/${id}`)
-      .then((res) => toast.success("Delete Successful"))
-      .catch((err) => console.log(err));
-    setCount(count + 1);
+    axios.delete(`http://localhost:9000/jobs/${id}`);
+    setCurrentData(currentData.filter((data) => data.id !== id));
+    toast.success("Delete Successful");
   }
 
-  // Rendering job cards
   return (
     <div>
-      {data.map((job) => (
+      {currentData?.map((job) => (
         <div key={job?.id} className="job-card">
           <div className="card-img">
             <img src={job.logo} alt={`Logo for ${job?.companyName}`} />
