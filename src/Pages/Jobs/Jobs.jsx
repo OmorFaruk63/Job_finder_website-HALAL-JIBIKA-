@@ -66,7 +66,12 @@ const Jobs = () => {
                 <Link to={"/editeJob"}>
                   <button onClick={() => setEdit(job)}>Edit Job</button>
                 </Link>
-                <button onClick={() => handleFavorite(job?.id)}>
+                <button
+                  onClick={() => {
+                    handleFavorite(job?.id);
+                    toast.success("Add to favorite successful.");
+                  }}
+                >
                   Add to Favourite
                 </button>
               </div>

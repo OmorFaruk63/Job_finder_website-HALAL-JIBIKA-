@@ -1,4 +1,12 @@
 .about {
-  width: 600px;
-  border: 1px solid rgb(211, 211, 211);
+  max-width: 900px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin: 10px auto;
+}
+.about h2 {
+  color: #007bffff;
+  padding: 10px;
+}
+.about p {
+  padding: 10px;
 }

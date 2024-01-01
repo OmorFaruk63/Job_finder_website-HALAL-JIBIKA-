@@ -1,7 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const JobAdd = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     title: "",
     logo: "",
@@ -20,10 +23,14 @@ const JobAdd = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("submit");
     axios
       .post("http://localhost:9000/jobs", input)
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      .then((res) => {
+        toast.success("Job add successful.");
+        navigate("/jobs");
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   return (
@@ -74,7 +81,7 @@ const JobAdd = () => {
             required
           />
 
-          <button type="submit">Sign Up</button>
+          <button type="submit">Submit</button>
         </form>
       </div>
     </div>
