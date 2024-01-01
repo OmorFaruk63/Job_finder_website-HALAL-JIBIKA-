@@ -7,16 +7,18 @@ const useFetch = (url) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+    setTimeout(() => {
+      axios
+        .get(url)
+        .then((res) => {
+          setData(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
+    }, 500);
   }, [url]);
 
   return { data, loading, error };

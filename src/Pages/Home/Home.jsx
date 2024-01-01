@@ -65,7 +65,7 @@ const Home = () => {
 
       {/* Home Job Card Container */}
       <section className="home-job-card-container">
-        {data.slice(5).map((job) => (
+        {data.slice(0, 5).map((job) => (
           <div key={job?.id} className="home-job-card">
             <div className="home-card-img">
               <img

@@ -1,29 +1,18 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "./Navbar.css";
 import { auth } from "../../Firebase/Firebase";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { useContext, useState } from "react";
-import { toast } from "react-toastify";
 import { context } from "../../context/Global/GlobalContext";
 const Navbar = () => {
   const { user, loading } = useContext(context);
-  const navigate = useNavigate();
   const [signOut] = useSignOut(auth);
   const [isTrue, setTrue] = useState(false);
 
   //Sing out Function
   function handleSingout() {
     signOut();
-  }
-
-  function handleNavigate() {
-    // if (user) {
-    //   navigate("/jobs");
-    // } else {
-    //   navigate("/signup");
-    //   toast("Please sign up first.");
-    // }
   }
 
   return (
@@ -41,8 +30,8 @@ const Navbar = () => {
           <NavLink to="/">
             <li>Home</li>
           </NavLink>
-          <NavLink to="/jobs">
-            <li onClick={handleNavigate}>Jobs</li>
+          <NavLink to={"/jobs"}>
+            <li>Jobs</li>
           </NavLink>
 
           <NavLink to="/about">
@@ -52,8 +41,8 @@ const Navbar = () => {
           <NavLink to="/contact">
             <li>Contact</li>
           </NavLink>
-          <NavLink to="/favorite">
-            <li>Favorite</li>
+          <NavLink to="/favourite">
+            <li>Favourite</li>
           </NavLink>
           {user ? (
             <NavLink onClick={handleSingout} to="/singup">

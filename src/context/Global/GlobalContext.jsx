@@ -6,20 +6,21 @@ import { auth } from "../../Firebase/Firebase";
 
 export const context = createContext();
 const GlobalContext = ({ children }) => {
-  const [favoract, setFavoract] = useState([]);
+  const [favourite, setFavourite] = useState([]);
   const [edit, setEdit] = useState();
   const [user, loading] = useAuthState(auth);
+
   function handleFavorite(id) {
-    setFavoract([...favoract, id]);
+    setFavourite([...favourite, id]);
   }
 
   return (
     <context.Provider
       value={{
-        favoract,
+        favourite,
         user,
         loading,
-        setFavoract,
+        setFavourite,
         handleFavorite,
         setEdit,
         edit,

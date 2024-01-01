@@ -10,7 +10,7 @@ import Signup from "../Pages/Signup/Signup";
 import SingIn from "../Pages/SingIn/SingIn";
 import JobAdd from "../Pages/Job Add/JobAdd";
 import Contact from "../Pages/Contact/Contact";
-import Favorite from "../Pages/Favoract/Favoract";
+import Favourite from "../Pages/Favourite/Favourite";
 import JobsDetails from "../Pages/Jobs/JobsDetails";
 import EditeJob from "../Pages/EditeJob/EditeJob.jsx";
 
@@ -51,8 +51,8 @@ export const routes = createBrowserRouter([
         element: <SingIn />,
       },
       {
-        path: "/favorite",
-        element: <Favorite />,
+        path: "/favourite",
+        element: <Favourite />,
       },
       {
         path: "/contact",
