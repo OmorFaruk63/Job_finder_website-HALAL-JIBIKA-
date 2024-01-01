@@ -40,7 +40,7 @@ const Home = () => {
             </h1>
           </header>
           {/* Home buttons */}
-          <div className="home-btn-content">
+          <div className="hero-btn">
             <button onClick={handleNavigate} className="home-btn">
               Explore Now!
             </button>

@@ -11,7 +11,6 @@ const Navbar = () => {
   const [signOut] = useSignOut(auth);
   const navigate = useNavigate();
   const [isTrue, setTrue] = useState(false);
-
   //Sing out Function
   function handleSingout() {
     signOut();

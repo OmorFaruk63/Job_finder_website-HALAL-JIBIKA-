@@ -2,12 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
-import { context } from "../../context/Global/GlobalContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./Jobs.css";
 import useFetch from "../../Hook/useFetch";
 import Loading from "../../Components/Loading/Loading";
+import { context } from "../../context/Global/GlobalContext";
 
 // Functional component definition
 const Jobs = () => {

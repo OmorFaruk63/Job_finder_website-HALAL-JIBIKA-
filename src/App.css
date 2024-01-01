@@ -3,10 +3,15 @@
 } */
 
 .navbar-position {
-    position: sticky;
-    top: 0;
+  position: sticky;
+  top: 0;
 }
 
 .outlet {
-    min-height: 77.3vh;
+  min-height: 77.3vh;
+}
+@media (max-width: 767px) {
+  .outlet {
+    min-height: 80.4vh;
+  }
 }
