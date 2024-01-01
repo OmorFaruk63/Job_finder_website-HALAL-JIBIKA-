@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "./Navbar.css";
 import { auth } from "../../Firebase/Firebase";
@@ -48,7 +48,7 @@ const Navbar = () => {
             <li>Favourite</li>
           </NavLink>
           {user ? (
-            <NavLink onClick={handleSingout}>Sign Out</NavLink>
+            <Link onClick={handleSingout}>Sign Out</Link>
           ) : (
             <>
               <NavLink to="/signup">

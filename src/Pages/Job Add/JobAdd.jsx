@@ -1,31 +1,22 @@
 import axios from "axios";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const JobAdd = () => {
   const navigate = useNavigate();
-  const [input, setInput] = useState({
-    title: "",
-    logo: "",
-    companyName: "",
-    position: "",
-    description: "",
-  });
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setInput((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  console.log(errors);
+  const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("submit");
+  const onSubmit = (data) => {
     axios
-      .post("http://localhost:9000/jobs", input)
+      .post("http://localhost:9000/jobs", data)
       .then((res) => {
         toast.success("Job add successful.");
         navigate("/jobs");
@@ -37,51 +28,38 @@ const JobAdd = () => {
     <div>
       <div className="signup-container">
         <h2>Add Job</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Job Title:</label>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
-            name="title"
-            value={input.title}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="imageURL">Job logo:(Image URL)</label>
-          <input
-            type="text"
-            name="logo"
-            value={input.logo}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="companyName">CompanyName:</label>
-          <input
-            type="text"
-            name="companyName"
-            value={input.companyName}
-            onChange={handleChange}
-            required
+            placeholder="title"
+            {...register("title", { required: true })}
           />
 
-          <label htmlFor="position">Position:</label>
           <input
             type="text"
-            name="position"
-            value={input.position}
-            onChange={handleChange}
-            required
+            placeholder="logo"
+            {...register("logo", { required: true, pattern: urlRegex })}
           />
 
-          <label htmlFor="password">Description:</label>
           <input
             type="text"
-            name="description"
-            value={input.description}
-            onChange={handleChange}
-            required
+            placeholder="companyName"
+            {...register("companyName", { required: true })}
           />
 
-          <button type="submit">Submit</button>
+          <input
+            type="text"
+            placeholder="position"
+            {...register("position", { required: true })}
+          />
+
+          <input
+            type="text"
+            placeholder="description"
+            {...register("description", { required: true })}
+          />
+
+          <input type="submit" />
         </form>
       </div>
     </div>

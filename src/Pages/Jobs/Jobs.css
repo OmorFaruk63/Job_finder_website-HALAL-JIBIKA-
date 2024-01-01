@@ -44,10 +44,17 @@
     padding: 5px;
   }
   .card-text {
+    text-align: left;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 10px;
+  }
+  .card-text h2,
+  h4,
+  p {
+    text-align: left;
     padding: 10px;
   }
 }

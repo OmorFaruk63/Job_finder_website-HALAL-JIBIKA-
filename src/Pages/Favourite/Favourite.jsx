@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { context } from "../../context/Global/GlobalContext";
+import "./Favourite.css";
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import useFetch from "../../Hook/useFetch";
@@ -11,7 +12,7 @@ const Favourite = () => {
   const filterData = data?.filter((job) => favourite.includes(job.id));
 
   return (
-    <div>
+    <div className="fav">
       {filterData.length > 0 ? (
         filterData?.map((data) => (
           <div key={data?.id} className="job-card">
@@ -35,7 +36,7 @@ const Favourite = () => {
           </div>
         ))
       ) : (
-        <h1>no Favoract Job Add</h1>
+        <h1 className="fav-h1">no Favoract Job Add</h1>
       )}
     </div>
   );
