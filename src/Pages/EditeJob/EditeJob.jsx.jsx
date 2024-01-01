@@ -1,89 +1,91 @@
 import axios from "axios";
-import { useContext, useState } from "react"
+import { useContext, useEffect } from "react";
 import { context } from "../../context/Global/GlobalContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const EditeJob = () => {
-    const { edit } = useContext(context)
-    const navigate = useNavigate()
-    const [input, setInput] = useState({
-        title: edit.title,
-        logo: edit.logo,
-        companyName: edit.companyName,
-        position: edit.position,
-        description: edit.description,
-    })
+  const { edit } = useContext(context);
+  const navigate = useNavigate();
 
-    function handleChange(e) {
-        const { name, value } = e.target;
-        setInput((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue, // Added setValue from react-hook-form
+  } = useForm();
+  const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+
+  // Assuming you have the previous data available in a variable named 'previousData'
+  const previousData = {
+    title: edit.title,
+    logo: edit.logo,
+    companyName: edit.companyName,
+    position: edit.position,
+    description: edit.description,
+  };
+
+  // Set default values when the component mounts
+  useEffect(() => {
+    for (const key in previousData) {
+      if (previousData.hasOwnProperty(key)) {
+        setValue(key, previousData[key]);
+      }
     }
-    function handleSubmit(e) {
-        e.preventDefault();
-        axios.put(`http://localhost:9000/jobs/${edit.id}`, input)
-            .then((res) => {
-                toast.success("Edite Successful")
-                navigate(-1)
-            })
-            .catch((error) => toast.error(error.message))
-    }
-    return (
-        <div><div className="signup-container">
-            <h2>Edite Job</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Edite Job Title:</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={input.title}
-                    onChange={handleChange}
-                    required
-                />
-                <label htmlFor="imageURL">Edite Job
-                    logo:(Image URL)</label>
-                <input
-                    type="text"
-                    name="logo"
-                    value={input.logo}
-                    onChange={handleChange}
-                    required
-                />
-                <label htmlFor="companyName">Edite CompanyName:</label>
-                <input
-                    type="text"
-                    name="companyName"
-                    value={input.companyName}
-                    onChange={handleChange}
-                    required
-                />
+  }, [edit]);
 
-                <label htmlFor="position">Edite Position:</label>
-                <input
-                    type="text"
-                    name="position"
-                    value={input.position}
-                    onChange={handleChange}
-                    required
-                />
+  const onSubmit = (data) => {
+    axios
+      .put(`http://localhost:9000/jobs/${edit.id}`, data)
+      .then((res) => {
+        toast.success("Edite Successful");
+        navigate(-1);
+      })
+      .catch((error) => toast.error(error.message));
+  };
 
-                <label htmlFor="password">Edite Description:</label>
-                <input
-                    type="text"
-                    name="description"
-                    value={input.description}
-                    onChange={handleChange}
-                    required
-                />
+  return (
+    <div>
+      <div className="signup-container">
+        <h2>Edite Job</h2>
 
-                <button type="submit">Edite Details</button>
-            </form>
-        </div>
-        </div>
-    )
-}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="text"
+            placeholder="title"
+            {...register("title", { required: true })}
+          />
+
+          <input
+            type="text"
+            placeholder="logo"
+            {...register("logo", { required: true, pattern: urlRegex })}
+          />
+
+          <input
+            type="text"
+            placeholder="companyName"
+            {...register("companyName", { required: true })}
+          />
+
+          <input
+            type="text"
+            placeholder="position"
+            {...register("position", { required: true })}
+          />
+
+          <input
+            type="text"
+            placeholder="description"
+            {...register("description", { required: true })}
+          />
+
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default EditeJob;

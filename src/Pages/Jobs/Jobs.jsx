@@ -8,11 +8,11 @@ import "./Jobs.css";
 import useFetch from "../../Hook/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import { context } from "../../context/Global/GlobalContext";
-
+import { FaHeart } from "react-icons/fa";
 // Functional component definition
 const Jobs = () => {
   // Destructuring values from the context and state
-  const { setEdit, handleFavorite, user } = useContext(context);
+  const { setEdit, user } = useContext(context);
 
   // Geting user authentication status
   const navigate = useNavigate();
@@ -39,6 +39,32 @@ const Jobs = () => {
     setCurrentData(currentData.filter((data) => data.id !== id));
   }
 
+  // Handling job favoract
+  function handleFavorite(job) {
+    console.log(job?.istrue);
+    const status = job.istrue === "undefined" ? false : !job.istrue;
+    axios
+      .put(`http://localhost:9000/jobs/${job.id}`, {
+        ...job,
+        istrue: status,
+      })
+      .then((res) => {
+        toast.success("Add to favorite successful.");
+      })
+      .catch((error) => toast.error(error.message));
+    setCurrentData(
+      currentData.map((data) => {
+        if (data.id === job.id) {
+          return {
+            ...data,
+            istrue: status,
+          };
+        }
+        return data;
+      })
+    );
+  }
+
   return (
     <div>
       {loading ? (
@@ -49,7 +75,7 @@ const Jobs = () => {
         currentData?.map((job) => (
           <div key={job?.id} className="job-card">
             <div className="card-img">
-              <img src={job.logo} alt={`Logo for ${job?.companyName}`} />
+              <img src={job?.logo} alt={`Logo for ${job?.companyName}`} />
             </div>
             <div className="card-text">
               <h2>Job Title: {job?.title}</h2>
@@ -70,12 +96,10 @@ const Jobs = () => {
                   <button onClick={() => setEdit(job)}>Edit Job</button>
                 </Link>
                 <button
-                  onClick={() => {
-                    handleFavorite(job?.id);
-                    toast.success("Add to favorite successful.");
-                  }}
+                  className={job?.istrue && "heart"}
+                  onClick={() => handleFavorite(job)}
                 >
-                  Add to Favourite
+                  <FaHeart />
                 </button>
               </div>
             </div>

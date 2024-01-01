@@ -4,6 +4,7 @@
   background-color: #007bffff;
   align-items: center;
   position: relative;
+  z-index: 999;
 }
 
 .nav-manu {

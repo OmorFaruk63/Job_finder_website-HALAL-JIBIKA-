@@ -35,6 +35,9 @@
   align-items: center;
   justify-content: space-between;
 }
+.heart {
+  color: red;
+}
 @media (max-width: 767px) {
   .job-card {
     display: flex;

@@ -4,16 +4,17 @@ import "./Favourite.css";
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import useFetch from "../../Hook/useFetch";
+import Loading from "../../Components/Loading/Loading";
 
 const Favourite = () => {
-  const { favourite } = useContext(context);
   const { data, loading, error } = useFetch("http://localhost:9000/jobs");
-
-  const filterData = data?.filter((job) => favourite.includes(job.id));
+  const filterData = data.filter((data) => data.istrue == true);
 
   return (
     <div className="fav">
-      {filterData.length > 0 ? (
+      {loading ? (
+        <Loading />
+      ) : filterData.length > 0 ? (
         filterData?.map((data) => (
           <div key={data?.id} className="job-card">
             <div className="card-img">

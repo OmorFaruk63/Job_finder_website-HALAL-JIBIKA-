@@ -1,18 +1,25 @@
 .fav {
-  height: 85.3vh;
+  min-height: 85.3vh;
 }
 .fav-h1 {
   margin: 40px;
   text-align: center;
   color: #004219;
 }
+
+.card-contant {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
 @media (max-width: 950px) {
   .fav {
-    height: 84vh;
+    min-height: 84vh;
   }
 }
 @media (max-width: 550px) {
   .fav {
-    height: 64vh;
+    min-height: 64vh;
   }
 }
