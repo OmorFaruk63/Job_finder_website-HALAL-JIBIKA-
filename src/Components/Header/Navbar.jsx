@@ -21,11 +21,14 @@ const Navbar = () => {
   return (
     <div>
       <nav className="navbar">
-        <img
-          className="main-logo"
-          width="50px"
-          src="../../../public/logo-Main.jpg"
-        />
+        <div>
+          <img
+            className="main-logo"
+            width="50px"
+            src="../../../public/logo-Main.jpg"
+          />
+        </div>
+
         <ul
           onClick={() => setTrue(!isTrue)}
           className={isTrue ? "nav-manu-active nav-manu" : "nav-manu"}
@@ -74,9 +77,9 @@ const Navbar = () => {
           <span>
             {loading ? "Loading" : user ? user?.displayName : "profile Name"}
           </span>
-        </div>
-        <div onClick={() => setTrue(!isTrue)} className="bar">
-          {isTrue ? "❌" : <FaBars />}
+          <div onClick={() => setTrue(!isTrue)} className="bar">
+            {isTrue ? "❌" : <FaBars />}
+          </div>
         </div>
       </nav>
     </div>
