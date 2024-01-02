@@ -26,6 +26,7 @@
 
 .navbar a {
   text-decoration: none;
+  margin: 0 5px;
   color: white;
   padding: 5px 10px;
   border-radius: 5px;

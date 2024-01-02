@@ -70,21 +70,20 @@ const Home = () => {
             <div className="home-card-img">
               <img
                 width={"150px"}
+                height={"150px"}
                 src={job.logo}
                 alt={`Logo for ${job?.companyName}`}
               />
             </div>
             <div className="home-card-content">
-              <h2>{job?.title}</h2>
-              <hp>CompanyName: {job?.companyName}</hp>
+              <h2> {job?.companyName}</h2>
+              <hp>{job?.title}</hp>
               <p>Position: {job?.position}</p>
               <p>
                 <FaLocationDot /> Work from anywhere.
               </p>
               {/* Link to individual job page */}
-              <Link to={`/jobs/${job?.id}`}>
-                <button>View Job </button>
-              </Link>
+              <Link to={`/jobs/${job?.id}`}>View Job </Link>
             </div>
           </div>
         ))}

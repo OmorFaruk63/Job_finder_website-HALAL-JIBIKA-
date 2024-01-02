@@ -30,26 +30,47 @@ header h1 {
 }
 
 .home-job-card-container {
-  margin: 20px;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .home-job-card {
-  display: flex;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 200px;
-  margin: 10px auto;
-  text-align: center;
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 18%;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
 }
 
 .home-card-img img {
-  width: 70%;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.home-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+.home-card-content > p {
+  text-align: center;
+  padding: 10px;
+}
+
+.home-card-content > a {
+  background-color: #007bffff;
+  width: 100%;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 auto;
 }
 
 .home-card-contant {
@@ -106,24 +127,7 @@ footer {
   }
 }
 
-.hero-img img {
-  animation: scaleAnimation 1s ease-in-out 1;
-  z-index: -1;
-}
-
-@keyframes scaleAnimation {
-  0% {
-    transform: scale(0.7); /* Initial scale */
-  }
-  100% {
-    transform: scale(1); /* Return to the original scale */
-  }
-}
-.hero-img img {
-  animation: scaleAnimation 1s ease-in-out 1;
-  z-index: -1;
-}
-
+.hero-img img,
 header h1 {
   animation: scaleAnimation 1s ease-in-out 1;
   z-index: -1;

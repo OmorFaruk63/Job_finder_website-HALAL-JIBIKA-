@@ -66,7 +66,7 @@ const Jobs = () => {
   }
 
   return (
-    <div>
+    <div className="job-components">
       {loading ? (
         <h1>
           <Loading />
@@ -78,8 +78,8 @@ const Jobs = () => {
               <img src={job?.logo} alt={`Logo for ${job?.companyName}`} />
             </div>
             <div className="card-text">
-              <h2>Job Title: {job?.title}</h2>
-              <h4>CompanyName: {job?.companyName}</h4>
+              <h2>{job?.companyName}</h2>
+              <h4>Job Title: {job?.title}</h4>
               <p>Position: {job?.position}</p>
               <p>Description: {job?.description}</p>
               <p>
