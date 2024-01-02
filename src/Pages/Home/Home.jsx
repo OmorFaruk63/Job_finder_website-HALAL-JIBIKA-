@@ -48,7 +48,7 @@ const Home = () => {
             {/* Link to JobAdd page */}
             <Link to={"/JobAdd"}>
               <button onClick={handleNavigate} className="home-btn">
-                Hiring Employee
+                Post a JOB
               </button>
             </Link>
           </div>

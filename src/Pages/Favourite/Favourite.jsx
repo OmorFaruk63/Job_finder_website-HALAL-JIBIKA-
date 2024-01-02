@@ -1,14 +1,25 @@
 import "./Favourite.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHeart, FaLocationDot } from "react-icons/fa6";
 import useFetch from "../../Hook/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { context } from "../../context/Global/GlobalContext";
 
 const Favourite = () => {
   const { data, loading, error } = useFetch("http://localhost:9000/jobs");
+  // Destructuring values from the context and state
+  const { user } = useContext(context);
+
+  // Geting user authentication status
+  const navigate = useNavigate();
+
+  // Redirecting based on user authentication status
+  if (!user) {
+    navigate("/signup");
+  }
 
   const [currentData, setCurrentData] = useState(data);
 

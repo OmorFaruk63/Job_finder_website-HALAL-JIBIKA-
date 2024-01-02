@@ -26,7 +26,7 @@ const Navbar = () => {
           <img
             className="main-logo"
             width="50px"
-            src="../../../public/logo-Main.jpg"
+            src="https://shorturl.at/lCEX9"
           />
         </div>
 
