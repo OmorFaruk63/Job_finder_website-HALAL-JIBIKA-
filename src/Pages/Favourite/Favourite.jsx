@@ -5,21 +5,21 @@ import useFetch from "../../Hook/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useContext, useEffect, useState } from "react";
-import { context } from "../../context/Global/GlobalContext";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../Firebase/Firebase";
 
 const Favourite = () => {
   const { data, loading, error } = useFetch("http://localhost:9000/jobs");
   // Destructuring values from the context and state
-  const { user } = useContext(context);
+  const [user, authLoading] = useAuthState(auth);
 
   // Geting user authentication status
   const navigate = useNavigate();
 
   // Redirecting based on user authentication status
-  if (!user) {
-    navigate("/signup");
-  }
+
+  console.log(authLoading, 111);
 
   const [currentData, setCurrentData] = useState(data);
 
@@ -42,6 +42,14 @@ const Favourite = () => {
         setCurrentData(currentData.filter((d) => d.id !== job.id));
       })
       .catch((error) => toast.error(error.message));
+  }
+
+  if (authLoading) {
+    return <Loading />;
+  }
+
+  if (!user) {
+    return navigate("/signup");
   }
 
   if (filterData.length < 1) {

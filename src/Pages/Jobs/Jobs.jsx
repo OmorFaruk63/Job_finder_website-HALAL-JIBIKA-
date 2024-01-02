@@ -9,18 +9,18 @@ import useFetch from "../../Hook/useFetch";
 import Loading from "../../Components/Loading/Loading";
 import { context } from "../../context/Global/GlobalContext";
 import { FaHeart } from "react-icons/fa";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../Firebase/Firebase";
 // Functional component definition
 const Jobs = () => {
   // Destructuring values from the context and state
-  const { setEdit, user } = useContext(context);
+  const { setEdit } = useContext(context);
+
+  // Destructuring values from the context and state
+  const [user, authLoading] = useAuthState(auth);
 
   // Geting user authentication status
   const navigate = useNavigate();
-
-  // Redirecting based on user authentication status
-  if (!user) {
-    navigate("/signup");
-  }
 
   const { data, loading, error } = useFetch("http://localhost:9000/jobs");
   const [currentData, setCurrentData] = useState(data);
@@ -63,6 +63,14 @@ const Jobs = () => {
         return data;
       })
     );
+  }
+
+  if (authLoading) {
+    return <Loading />;
+  }
+
+  if (!user) {
+    return navigate("/signup");
   }
 
   return (

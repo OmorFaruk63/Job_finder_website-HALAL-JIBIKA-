@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useContext, useState } from "react";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
+import { useState } from "react";
 import { auth } from "../../Firebase/Firebase";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
-import { context } from "../../context/Global/GlobalContext";
 
 const Singup = () => {
   const [name, setName] = useState("");
@@ -12,7 +14,7 @@ const Singup = () => {
   const [password, setPassword] = useState("");
   const [comfirmPassword, setComfirmPassword] = useState("");
 
-  const { user } = useContext(context);
+  const [user] = useAuthState(auth);
   // Geting user authentication status
   const navigate = useNavigate();
   // Redirecting based on user authentication status
