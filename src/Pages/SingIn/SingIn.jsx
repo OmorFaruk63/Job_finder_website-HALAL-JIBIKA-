@@ -10,8 +10,11 @@ import {
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useContext, useState } from "react";
 import { context } from "../../context/Global/GlobalContext";
+import { toast } from "react-toastify";
 
 const SingIn = () => {
+  const navigate = useNavigate();
+  const { user } = useContext(context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
@@ -32,12 +35,12 @@ const SingIn = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await signInWithEmailAndPassword(email, password);
+    if (email || password !== "") {
+      await signInWithEmailAndPassword(email, password);
+    } else {
+      toast.error("Input field required");
+    }
   }
-
-  const navigate = useNavigate();
-
-  const { user } = useContext(context);
 
   console.log("SingIn");
 
@@ -55,7 +58,6 @@ const SingIn = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
 
           <label htmlFor="password">Password:</label>
@@ -65,7 +67,6 @@ const SingIn = () => {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
           <button type="submit">Sign In</button>
         </form>

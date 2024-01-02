@@ -64,6 +64,7 @@ const Home = () => {
       </div>
 
       {/* Home Job Card Container */}
+      <h1 className="Latest-Jobs"> Latest Jobs</h1>
       <section className="home-job-card-container">
         {data.slice(0, 5).map((job) => (
           <div key={job?.id} className="home-job-card">

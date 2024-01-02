@@ -72,7 +72,10 @@ header h1 {
   cursor: pointer;
   margin: 0 auto;
 }
-
+.Latest-Jobs {
+  text-align: center;
+  margin: 30px;
+}
 .home-card-contant {
   padding: 5px;
   text-align: left;

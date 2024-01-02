@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-
+import "./JobAdd.css";
 const JobAdd = () => {
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const JobAdd = () => {
 
   return (
     <div>
-      <div className="signup-container">
+      <div className="add-job-container">
         <h2>Add Job</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input

@@ -1,48 +1,46 @@
-.signup-container {
-    max-width: 320px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.signup {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 40px auto;
+  padding: 30px 0px;
+  border-radius: 10px;
 }
 
-h2 {
-    text-align: center;
+.signup form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+.signup input {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.ConfirmPassword {
+  position: relative;
+}
+.ConfirmPassword span {
+  position: absolute;
+  top: 17px;
+  right: 11px;
+  cursor: pointer;
 }
 
-label {
-    margin-top: 10px;
+.signup span {
+  color: rgb(255, 0, 0);
 }
 
-input {
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.signup input[type="submit"] {
+  background-color: #007bffff;
+  color: white;
+  cursor: pointer;
 }
 
-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.switch-btn a {
-    color: rgb(9, 144, 255);
-    font-weight: bold;
+.signup input[type="submit"]:hover {
+  background-color: rgb(0, 79, 164);
 }

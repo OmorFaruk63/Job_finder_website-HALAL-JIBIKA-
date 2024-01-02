@@ -49,6 +49,9 @@
   align-items: center;
   color: white;
 }
+.navbar-img span {
+  margin-left: 10px;
+}
 
 .navbar-img img {
   border-radius: 50%;

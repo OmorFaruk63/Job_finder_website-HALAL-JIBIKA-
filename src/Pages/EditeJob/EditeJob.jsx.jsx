@@ -4,7 +4,7 @@ import { context } from "../../context/Global/GlobalContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import "./EditeJob.css";
 const EditeJob = () => {
   const { edit } = useContext(context);
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const EditeJob = () => {
 
   return (
     <div>
-      <div className="signup-container">
+      <div className="edit-job-container">
         <h2>Edite Job</h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>

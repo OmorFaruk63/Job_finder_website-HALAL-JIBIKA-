@@ -9,7 +9,7 @@ const Error = () => {
     <div>
       <Navbar />
       <div className="error">
-        <h1>{error.message}</h1>
+        <h1>{error && error.message}</h1>
         <button onClick={() => navigate(-1)}> Go Back</button>
       </div>
     </div>
