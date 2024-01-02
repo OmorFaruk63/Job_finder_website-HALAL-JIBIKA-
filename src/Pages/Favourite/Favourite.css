@@ -9,7 +9,10 @@
   text-align: center;
   color: #004219;
 }
-
+.no-fav-add {
+  text-align: center;
+  margin: 40px 0px;
+}
 .job-card {
   width: 100%;
   max-width: 300px;

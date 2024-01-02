@@ -11,6 +11,7 @@ const Navbar = () => {
   const [signOut] = useSignOut(auth);
   const navigate = useNavigate();
   const [isTrue, setTrue] = useState(false);
+
   //Sing out Function
   function handleSingout() {
     signOut();
@@ -47,9 +48,11 @@ const Navbar = () => {
           <NavLink to="/contact">
             <li>Contact</li>
           </NavLink>
+
           <NavLink to="/favourite">
             <li>Favourite</li>
           </NavLink>
+
           {user ? (
             <Link onClick={handleSingout}>Sign Out</Link>
           ) : (

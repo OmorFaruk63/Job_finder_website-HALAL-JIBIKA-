@@ -26,14 +26,21 @@ const Favourite = () => {
         istrue: false,
       })
       .then((res) => {
-        toast.success("Removed from favorites successfully.");
+        toast.warning("Removed from favorites successfully.");
+
         setCurrentData(currentData.filter((d) => d.id !== job.id));
       })
       .catch((error) => toast.error(error.message));
   }
 
   if (filterData.length < 1) {
-    return <h1>no data add </h1>;
+    return loading ? (
+      <h1>
+        <Loading />
+      </h1>
+    ) : (
+      <h1 className="no-fav-add">No favorite job add. </h1>
+    );
   }
   return (
     <div className="fav">

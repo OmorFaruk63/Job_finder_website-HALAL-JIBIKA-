@@ -34,14 +34,13 @@ const Jobs = () => {
     console.log(id);
     await axios
       .delete(`http://localhost:9000/jobs/${id}`)
-      .then((res) => toast.success("Delete Successful"))
+      .then((res) => console.log("Delete Successful"))
       .catch((err) => toast.error(err.message));
     setCurrentData(currentData.filter((data) => data.id !== id));
   }
 
   // Handling job favoract
   function handleFavorite(job) {
-    console.log(job?.istrue);
     const status = job.istrue === "undefined" ? false : !job.istrue;
     axios
       .put(`http://localhost:9000/jobs/${job.id}`, {
@@ -49,7 +48,8 @@ const Jobs = () => {
         istrue: status,
       })
       .then((res) => {
-        toast.success("Add to favorite successful.");
+        job.istrue !== true && toast.success("Add to favorite successful.");
+        job.istrue === true && toast.warn("Remove favorite");
       })
       .catch((error) => toast.error(error.message));
     setCurrentData(
