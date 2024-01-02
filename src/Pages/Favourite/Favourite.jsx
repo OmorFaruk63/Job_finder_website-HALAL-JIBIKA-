@@ -19,8 +19,6 @@ const Favourite = () => {
 
   // Redirecting based on user authentication status
 
-  console.log(authLoading, 111);
-
   const [currentData, setCurrentData] = useState(data);
 
   const filterData = data.filter((d) => d.istrue === true);
@@ -82,14 +80,16 @@ const Favourite = () => {
                     <FaLocationDot /> Work from anywhere.
                   </p>
                   <div className="fav-card-btn">
-                    <Link to={`/jobs/${data?.id}`}>View Job</Link>
+                    <Link to={`/jobs/${data?.id}`}>
+                      <button>View Job</button>
+                    </Link>
+
                     <button
                       className={data?.istrue && "heart"}
                       onClick={() => handleFavoriteDataRemove(data)}
                     >
-                      <FaHeart /> .
+                      <FaHeart /> Remove from Favorite
                     </button>
-                    Remove from Favorite
                   </div>
                 </div>
               </div>

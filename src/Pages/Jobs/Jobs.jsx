@@ -104,7 +104,7 @@ const Jobs = () => {
                   <button onClick={() => setEdit(job)}>Edit Job</button>
                 </Link>
                 <button
-                  className={job?.istrue && "heart"}
+                  className={job?.istrue ? "heart" : ""}
                   onClick={() => handleFavorite(job)}
                 >
                   <FaHeart />

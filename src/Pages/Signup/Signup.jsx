@@ -1,74 +1,64 @@
-import { Link, useNavigate } from "react-router-dom";
-import "./Signup.css";
 import {
   useAuthState,
+  useUpdateProfile,
   useCreateUserWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
-import { useState } from "react";
+
+import { useForm } from "react-hook-form";
 import { auth } from "../../Firebase/Firebase";
-import { useUpdateProfile } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
-const Singup = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [comfirmPassword, setComfirmPassword] = useState("");
+const Signup = () => {
+  const [updateProfile] = useUpdateProfile(auth);
+  const [createUserWithEmailAndPassword] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [user, loading] = useAuthState(auth);
 
-  const [user] = useAuthState(auth);
-  // Geting user authentication status
   const navigate = useNavigate();
   // Redirecting based on user authentication status
   if (user) {
     navigate(-1);
   }
 
-  const [updateProfile] = useUpdateProfile(auth);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    console.log(data.Email, "Email");
+    console.log(data.Password, "Password");
+    await createUserWithEmailAndPassword(data.Email, data.Password);
+    await updateProfile({ displayName: data.Username });
+    console.log(errors);
+  };
 
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    await createUserWithEmailAndPassword(email, password);
-    await updateProfile({ displayName: name });
-    setComfirmPassword("");
-    setPassword("");
-    setEmail("");
-  }
   return (
-    <div>
-      <div className="signup-container">
-        <h2>Sign Up</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {name.length === "" && (
-            <span className="input-field">Please enter your name.</span>
-          )}
-          <label htmlFor="email">Email:</label>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} />
-          <label htmlFor="password">Password:</label>
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label htmlFor="password">Confirm Password:</label>
-          <input
-            value={comfirmPassword}
-            onChange={(e) => setComfirmPassword(e.target.value)}
-          />
-          <button type="submit">Sign Up</button>
-        </form>
-        <span className="switch-btn">
-          If you All ready Have Account <Link to={"/singin"}>click </Link>{" "}
-        </span>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="text"
+        placeholder="Username"
+        {...register("Username", { required: true })}
+      />
+      <input
+        type="text"
+        placeholder="Email"
+        {...register("Email", { required: true })}
+      />
+      <input
+        type="text"
+        placeholder="Password"
+        {...register("Password", { required: true })}
+      />
+      <input
+        type="text"
+        placeholder="Confirm Password"
+        {...register("Confirm Password", {})}
+      />
+
+      <input type="submit" />
+    </form>
   );
 };
 
-export default Singup;
+export default Signup;
