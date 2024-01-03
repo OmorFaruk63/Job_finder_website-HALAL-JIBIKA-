@@ -47,7 +47,7 @@ export const routes = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: "SingIn",
+        path: "singin",
         element: <SingIn />,
       },
       {

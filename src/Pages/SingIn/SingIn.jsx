@@ -6,7 +6,6 @@ import { auth } from "../../Firebase/Firebase";
 import {
   useSignInWithGoogle,
   useSignInWithGithub,
-  useAuthState,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useState } from "react";
@@ -15,7 +14,6 @@ import Loading from "../../Components/Loading/Loading";
 
 const SingIn = () => {
   const navigate = useNavigate();
-  const [user, authLoad] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //google Auth
@@ -26,18 +24,15 @@ const SingIn = () => {
     useSignInWithEmailAndPassword(auth);
 
   if (signInError) {
-    toast.error(signInError.message, { toastId: "omor" });
+    toast.error("Invalid email or password", { toastId: "omor" });
   }
 
   if (signInUser) {
     toast.success("Sing up successfull", { toastId: "omor" });
   }
-  if (authLoad) {
-    return <Loading />;
-  }
 
-  if (user) {
-    return navigate("/");
+  if (signInLoading) {
+    return <Loading />;
   }
 
   function handleGoogle() {
@@ -56,7 +51,9 @@ const SingIn = () => {
       toast.error("Input field required");
     }
   }
-
+  if (signInUser) {
+    return navigate("/");
+  }
   return (
     <div>
       <div className="signin-container">

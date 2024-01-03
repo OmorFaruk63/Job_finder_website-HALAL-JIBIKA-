@@ -61,7 +61,7 @@ const Navbar = () => {
                 {" "}
                 <li> Sign up</li>
               </NavLink>
-              <NavLink to="/SingIn">
+              <NavLink to="/singin">
                 {" "}
                 <li>Sing In</li>
               </NavLink>

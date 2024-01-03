@@ -70,7 +70,8 @@ const Jobs = () => {
   }
 
   if (!user) {
-    return navigate("/SingIn");
+    toast.warn("Please sign up first", { toastId: "omor" });
+    return navigate("/singin");
   }
 
   return (

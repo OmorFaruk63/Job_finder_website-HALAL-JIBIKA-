@@ -1,8 +1,9 @@
 import "./Signup.css";
 import {
-  useAuthState,
   useUpdateProfile,
   useCreateUserWithEmailAndPassword,
+  useSignOut,
+  useAuthState,
 } from "react-firebase-hooks/auth";
 
 import { useForm } from "react-hook-form";
@@ -14,37 +15,29 @@ import Loading from "../../Components/Loading/Loading";
 
 const Signup = () => {
   const [updateProfile] = useUpdateProfile(auth);
-
-  const [createUserWithEmailAndPassword, singupUser, load, singupErr] =
+  const [signOut] = useSignOut(auth);
+  const [user] = useAuthState(auth);
+  const [createUserWithEmailAndPassword, singupUser, singupLoad, singupErr] =
     useCreateUserWithEmailAndPassword(auth);
-
-  const [user, loading, authErr] = useAuthState(auth);
   const [isTrue, setisTrue] = useState(false);
+  const navigate = useNavigate();
+  // Redirecting based on user authentication status
 
   if (singupErr?.message) {
     toast.error(singupErr?.message, { toastId: "omor" });
   }
 
-  if (load || loading) {
-    <Loading />;
-  }
-
-  const navigate = useNavigate();
-  // Redirecting based on user authentication status
-  if (user) {
-    navigate("/");
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = async (data) => {
     try {
       if (data.ConfirmPassword === data.Password) {
         await createUserWithEmailAndPassword(data.Email, data.Password);
         await updateProfile({ displayName: data.Username });
-        console.log(singupErr?.message);
       } else {
         toast.error("Password doesn't match");
       }
@@ -54,6 +47,16 @@ const Signup = () => {
       toast.error("Error creating user: " + error.message);
     }
   };
+
+  if (user) {
+    toast.success("Registretion successful", { toastId: "omor" });
+    signOut();
+    navigate("/singin");
+  }
+
+  if (singupLoad) {
+    return <Loading />;
+  }
 
   return (
     <div>

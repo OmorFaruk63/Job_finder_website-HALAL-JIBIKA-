@@ -26,6 +26,14 @@ const Home = () => {
       toast("Please sign up first.");
     }
   }
+  function handleJobAdd() {
+    if (user) {
+      navigate("/JobAdd");
+    } else {
+      toast("Please sign up first.");
+      navigate("/signup");
+    }
+  }
 
   // Rendering the Home component
   return (
@@ -46,11 +54,10 @@ const Home = () => {
             </button>
 
             {/* Link to JobAdd page */}
-            <Link to={"/JobAdd"}>
-              <button onClick={handleNavigate} className="home-btn">
-                Post a JOB
-              </button>
-            </Link>
+
+            <button onClick={handleJobAdd} className="home-btn">
+              Post a JOB
+            </button>
           </div>
         </div>
         {/* Hero Image */}
