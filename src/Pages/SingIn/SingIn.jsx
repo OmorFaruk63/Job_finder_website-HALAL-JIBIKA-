@@ -6,28 +6,43 @@ import { auth } from "../../Firebase/Firebase";
 import {
   useSignInWithGoogle,
   useSignInWithGithub,
+  useAuthState,
+  useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useContext, useState } from "react";
-import { context } from "../../context/Global/GlobalContext";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Loading/Loading";
 
 const SingIn = () => {
   const navigate = useNavigate();
-  const { user } = useContext(context);
+  const [user, authLoad] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-
   //google Auth
   const [signInWithGoogle] = useSignInWithGoogle(auth);
+  //Github Auth
+  const [signInWithGithub] = useSignInWithGithub(auth);
+  const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
+    useSignInWithEmailAndPassword(auth);
+
+  if (signInError) {
+    toast.error(signInError.message, { toastId: "omor" });
+  }
+
+  if (signInUser) {
+    toast.success("Sing up successfull", { toastId: "omor" });
+  }
+  if (authLoad) {
+    return <Loading />;
+  }
+
+  if (user) {
+    return navigate("/");
+  }
 
   function handleGoogle() {
     signInWithGoogle();
   }
-
-  //Github Auth
-  const [signInWithGithub] = useSignInWithGithub(auth);
 
   function handleGithub() {
     signInWithGithub();
@@ -40,12 +55,6 @@ const SingIn = () => {
     } else {
       toast.error("Input field required");
     }
-  }
-
-  console.log("SingIn");
-
-  if (user) {
-    return navigate("/");
   }
 
   return (
@@ -73,7 +82,7 @@ const SingIn = () => {
         <span className="switch-btn">
           Register a New Account <Link to={"/signup"}>click </Link>{" "}
         </span>
-        <hr />
+
         <button onClick={handleGoogle} className="google-btn">
           <FaGoogle className="google-btn-icon" /> Sing Up With google
         </button>

@@ -14,19 +14,25 @@ import Loading from "../../Components/Loading/Loading";
 
 const Signup = () => {
   const [updateProfile] = useUpdateProfile(auth);
-  const [createUserWithEmailAndPassword, load, err] =
+
+  const [createUserWithEmailAndPassword, singupUser, load, singupErr] =
     useCreateUserWithEmailAndPassword(auth);
-  const [user, loading] = useAuthState(auth);
+
+  const [user, loading, authErr] = useAuthState(auth);
   const [isTrue, setisTrue] = useState(false);
+
+  if (singupErr?.message) {
+    toast.error(singupErr?.message, { toastId: "omor" });
+  }
 
   if (load || loading) {
     <Loading />;
   }
-  console.log(err?.message);
+
   const navigate = useNavigate();
   // Redirecting based on user authentication status
   if (user) {
-    navigate(-1);
+    navigate("/");
   }
   const {
     register,
@@ -34,13 +40,18 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    if (data.ConfirmPassword === data.Password) {
-      await createUserWithEmailAndPassword(data.Email, data.Password)
-        .then((res) => console.log("ok"))
-        .catch((err) => console.log(err.message));
-      await updateProfile({ displayName: data.Username });
-    } else {
-      toast.error("Password dosn't match");
+    try {
+      if (data.ConfirmPassword === data.Password) {
+        await createUserWithEmailAndPassword(data.Email, data.Password);
+        await updateProfile({ displayName: data.Username });
+        console.log(singupErr?.message);
+      } else {
+        toast.error("Password doesn't match");
+      }
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      // Handle the error here, e.g., show an error message to the user
+      toast.error("Error creating user: " + error.message);
     }
   };
 

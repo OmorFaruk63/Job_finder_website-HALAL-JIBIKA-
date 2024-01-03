@@ -78,7 +78,7 @@ const Home = () => {
             </div>
             <div className="home-card-content">
               <h2> {job?.companyName}</h2>
-              <hp>{job?.title}</hp>
+              <p>{job?.title}</p>
               <p>Position: {job?.position}</p>
               <p>
                 <FaLocationDot /> Work from anywhere.

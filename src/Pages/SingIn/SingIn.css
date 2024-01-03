@@ -1,64 +1,69 @@
 .signin-container {
-    max-width: 320px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 320px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 input {
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 10px;
+.signin-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
-button:hover {
-    background-color: #0056b3;
+.signin-container button:hover {
+  background-color: #0056b3;
 }
 
 .switch-btn a {
-    color: rgb(9, 144, 255);
-    font-weight: bold;
+  color: rgb(9, 144, 255);
+  font-weight: bold;
+}
+.switch-btn {
+  display: block;
+  margin: 5px auto;
 }
 
 .google-btn {
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-    outline: 1px solid rgb(229, 229, 229);
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  outline: 1px solid rgb(229, 229, 229);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .google-btn:hover {
-    background-color: rgb(255, 255, 255);
-    outline: 1px solid rgb(191, 191, 191);
+  background-color: rgb(255, 255, 255);
+  outline: 1px solid rgb(191, 191, 191);
 }
 
 .google-btn-icon {
-    color: red;
-    font-size: 20px;
+  color: red;
+  font-size: 20px;
 }
 
 .github-btn-icon {
-    font-size: 20px;
+  font-size: 20px;
 }

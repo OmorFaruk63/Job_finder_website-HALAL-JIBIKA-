@@ -47,7 +47,7 @@ const Favourite = () => {
   }
 
   if (!user) {
-    return navigate("/signup");
+    return navigate("/SingIn");
   }
 
   if (filterData.length < 1) {

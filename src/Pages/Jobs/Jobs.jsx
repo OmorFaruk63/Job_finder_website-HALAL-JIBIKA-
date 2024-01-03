@@ -70,7 +70,7 @@ const Jobs = () => {
   }
 
   if (!user) {
-    return navigate("/signup");
+    return navigate("/SingIn");
   }
 
   return (
