@@ -13,6 +13,8 @@ import Contact from "../Pages/Contact/Contact";
 import Favourite from "../Pages/Favourite/Favourite";
 import JobsDetails from "../Pages/Jobs/JobsDetails";
 import EditeJob from "../Pages/EditeJob/EditeJob.jsx";
+import JobApplication from "../Pages/JobApplication/JobApplication.jsx";
+import NotFound from "../Pages/NotFound/NotFound.jsx";
 
 export const routes = createBrowserRouter([
   {
@@ -39,6 +41,10 @@ export const routes = createBrowserRouter([
         element: <JobAdd />,
       },
       {
+        path: "*",
+        element: <NotFound />,
+      },
+      {
         path: "/editeJob",
         element: <EditeJob />,
       },
@@ -49,6 +55,10 @@ export const routes = createBrowserRouter([
       {
         path: "singin",
         element: <SingIn />,
+      },
+      {
+        path: "jobapplication",
+        element: <JobApplication />,
       },
       {
         path: "/favourite",

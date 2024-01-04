@@ -1,0 +1,50 @@
+.job-application-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.job-application-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 8px;
+}
+
+.form-input {
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.error-input {
+  border: 1px solid #ff0000;
+}
+
+.error-message {
+  color: #ff0000;
+  margin-top: 5px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .job-application-container {
+    padding: 10px;
+  }
+
+  .form-input {
+    width: 100%;
+  }
+}

@@ -11,7 +11,7 @@ const JobAdd = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(errors);
+
   const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
 
   const onSubmit = (data) => {

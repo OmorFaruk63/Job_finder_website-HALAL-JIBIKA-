@@ -1,6 +1,5 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import "./JobsDetails.css";
-import { toast } from "react-toastify";
 const JobsDetails = () => {
   const { data } = useLoaderData();
   const navigate = useNavigate();
@@ -69,8 +68,7 @@ const JobsDetails = () => {
       <div className="JobsDetails-btn">
         <button
           onClick={() => {
-            toast.success("We have accepted your application");
-            navigate(-1);
+            navigate("/jobapplication");
           }}
         >
           {" "}

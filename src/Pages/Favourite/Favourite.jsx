@@ -1,5 +1,5 @@
 import "./Favourite.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FaHeart, FaLocationDot } from "react-icons/fa6";
 import useFetch from "../../Hook/useFetch";
 import Loading from "../../Components/Loading/Loading";
@@ -47,7 +47,7 @@ const Favourite = () => {
   }
 
   if (!user) {
-    return navigate("/SingIn");
+    return <Navigate to={"/SingIn"}></Navigate>;
   }
 
   if (filterData.length < 1) {

@@ -31,10 +31,9 @@ const Jobs = () => {
 
   // Handling job deletion
   async function handleDeleteJob(id) {
-    console.log(id);
     await axios
       .delete(`http://localhost:9000/jobs/${id}`)
-      .then((res) => console.log("Delete Successful"))
+      .then((res) => toast.success("Delete Successful"))
       .catch((err) => toast.error(err.message));
     setCurrentData(currentData.filter((data) => data.id !== id));
   }
