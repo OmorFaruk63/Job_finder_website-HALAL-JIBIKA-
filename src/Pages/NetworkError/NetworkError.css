@@ -1,0 +1,31 @@
+/* NetworkErrorPage.css */
+
+.network-error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f8f8; /* Set your background color */
+}
+
+.error-message {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ff0000; /* Set your error message color */
+}
+
+.reload-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff; /* Set your button background color */
+  color: #ffffff; /* Set your button text color */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+}
+
+.reload-button:hover {
+  background-color: #0056b3; /* Set your button background color on hover */
+}

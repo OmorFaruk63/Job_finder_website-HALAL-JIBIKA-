@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase/Firebase";
+import NetworkErrorPage from "../NetworkError/NetworkError";
 
 const Favourite = () => {
   const { data, loading, error } = useFetch("http://localhost:9000/jobs");
@@ -26,6 +27,10 @@ const Favourite = () => {
   useEffect(() => {
     setCurrentData(data);
   }, [data]);
+
+  if (error) {
+    return <NetworkErrorPage />;
+  }
 
   // Handling job favoract
   function handleFavoriteDataRemove(job) {

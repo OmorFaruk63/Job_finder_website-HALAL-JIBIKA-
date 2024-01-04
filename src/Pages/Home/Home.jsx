@@ -1,21 +1,24 @@
 // Importing necessary dependencies and styles
-import { useContext, useState } from "react";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import "./Home.css";
-import { context } from "../../context/Global/GlobalContext";
 import useFetch from "../../Hook/useFetch";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../Firebase/Firebase";
+import NetworkErrorPage from "../NetworkError/NetworkError";
 
 const Home = () => {
-  const { user } = useContext(context);
+  const [user] = useAuthState(auth);
 
   // Navigation setup
   const navigate = useNavigate();
 
   const { data, loading, error } = useFetch("http://localhost:9000/jobs");
 
-  const [currentData, setCurrentData] = useState(data);
+  if (error) {
+    return <NetworkErrorPage />;
+  }
 
   // Function to handle navigation and show a toast if not signed up
   function handleNavigate() {
@@ -52,9 +55,7 @@ const Home = () => {
             <button onClick={handleNavigate} className="home-btn">
               Explore Now!
             </button>
-
             {/* Link to JobAdd page */}
-
             <button onClick={handleJobAdd} className="home-btn">
               Post a JOB
             </button>
@@ -69,7 +70,6 @@ const Home = () => {
           />
         </div>
       </div>
-
       {/* Home Job Card Container */}
       <h1 className="Latest-Jobs"> Latest Jobs</h1>
       <section className="home-job-card-container">
@@ -91,7 +91,12 @@ const Home = () => {
                 <FaLocationDot /> Work from anywhere.
               </p>
               {/* Link to individual job page */}
-              <Link to={`/jobs/${job?.id}`}>View Job </Link>
+
+              {!user ? (
+                <Link to={`/singin`}>View </Link>
+              ) : (
+                <Link to={`/jobs/${job?.id}`}>View Job </Link>
+              )}
             </div>
           </div>
         ))}

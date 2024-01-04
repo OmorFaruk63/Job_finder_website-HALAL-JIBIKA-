@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import NetworkErrorPage from "../Pages/NetworkError/NetworkError";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);

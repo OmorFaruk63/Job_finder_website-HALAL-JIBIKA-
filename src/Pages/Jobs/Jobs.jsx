@@ -11,6 +11,7 @@ import { context } from "../../context/Global/GlobalContext";
 import { FaHeart } from "react-icons/fa";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../Firebase/Firebase";
+import NetworkErrorPage from "../NetworkError/NetworkError";
 // Functional component definition
 const Jobs = () => {
   // Destructuring values from the context and state
@@ -28,6 +29,10 @@ const Jobs = () => {
   useEffect(() => {
     setCurrentData(data);
   }, [data]);
+
+  if (error) {
+    return <NetworkErrorPage />;
+  }
 
   // Handling job deletion
   async function handleDeleteJob(id) {
