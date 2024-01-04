@@ -1,16 +1,37 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import "./JobsDetails.css";
+import { useState } from "react";
+import axios from "axios";
 const JobsDetails = () => {
   const { data } = useLoaderData();
   const navigate = useNavigate();
+  const status = data.isApplied === "undefined" ? false : data.isApplied;
+
+  const [currentData, setCurrentData] = useState({
+    ...data,
+    isApplied: status,
+  });
+
+  function handleApply(job) {
+    axios
+      .put(`http://localhost:9000/jobs/${job.id}`, {
+        ...job,
+        isApplied: false,
+      })
+      .then((res) => console.log())
+      .catch((err) => console.log());
+    setCurrentData((prev) => {
+      return { ...prev, isApplied: false };
+    });
+  }
 
   return (
     <div className="JobsDetails-card">
       <div className="JobsDetails-img">
-        <img src={data.logo} />
+        <img src={currentData?.logo} />
         <div>
-          <h2>{data?.title}</h2>
-          <h4>CompanyName: {data?.companyName}</h4>
+          <h2>{currentData?.title}</h2>
+          <h4>CompanyName: {currentData?.companyName}</h4>
         </div>
       </div>
       <div className="JobsDetails-contant1">
@@ -27,6 +48,7 @@ const JobsDetails = () => {
       <hr />
       <div className="JobsDetails-contant2">
         <h2>Job Responsibilities & Context</h2>
+
         <p>
           The company is seeking highly skilled Front-End Developers to join our
           dynamic team. The position requires a wealth of experience and
@@ -52,6 +74,7 @@ const JobsDetails = () => {
       <hr />
       <div className="JobsDetails-contant2">
         <h2>Additional Requirements</h2>
+
         <p>
           Age 28 to 35 years Working experience in functions, Store Procedure
           SQL Server. Experience with GIT, Azure DevOps, and agile
@@ -66,14 +89,13 @@ const JobsDetails = () => {
       <h2>Email your CV</h2>
       <p>contact@finsource.net</p>
       <div className="JobsDetails-btn">
-        <button
-          onClick={() => {
-            navigate("/jobapplication");
-          }}
-        >
-          {" "}
-          Applay Now{" "}
-        </button>{" "}
+        {currentData.isApplied ? (
+          <button onClick={() => handleApply(currentData)}>Apply Cancel</button>
+        ) : (
+          <Link to={`/jobapplication`} state={currentData}>
+            <button> Applay Now </button>
+          </Link>
+        )}
         <button onClick={() => navigate(-1)}> go back</button>
       </div>
     </div>

@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
 import "./JobApplication.css";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const JobApplication = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
   const {
     register,
@@ -12,13 +14,26 @@ const JobApplication = () => {
   } = useForm();
 
   const onSubmit = () => {
-    toast.success("Job Application Submited");
-    navigate(-1);
+    const status = state.isApplied === "undefined" ? false : !state.isApplied;
+    axios
+      .put(`http://localhost:9000/jobs/${state.id}`, {
+        ...state,
+        isApplied: status,
+      })
+      .then((res) => {
+        toast.success(`Application Submited in ${state?.companyName}`);
+        console.log(res.message);
+      })
+      .catch((error) => toast.error(error.message));
+    navigate("/jobs");
   };
 
   return (
     <div className="job-application-container">
       <h1 className="form-title">Job Application Form</h1>
+      <h4 className="job-application-companyName">
+        {state.companyName} <img width={"30px"} src={state.logo} />
+      </h4>
       <form onSubmit={handleSubmit(onSubmit)} className="job-application-form">
         <label htmlFor="fullName" className="form-label">
           Full Name:

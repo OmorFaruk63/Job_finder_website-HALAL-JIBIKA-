@@ -3,7 +3,15 @@
   margin: auto;
   padding: 20px;
 }
-
+.job-application-companyName {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.job-application-companyName img {
+  margin-left: 10px;
+  border-radius: 50%;
+}
 .form-title {
   text-align: center;
   margin-bottom: 20px;
