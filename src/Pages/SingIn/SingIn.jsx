@@ -7,6 +7,7 @@ import {
   useSignInWithGoogle,
   useSignInWithGithub,
   useSignInWithEmailAndPassword,
+  useAuthState,
 } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -15,11 +16,13 @@ import Loading from "../../Components/Loading/Loading";
 const SingIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [user, authLoading] = useAuthState(auth);
   const [password, setPassword] = useState("");
   //google Auth
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, googleUser, googleLoading] =
+    useSignInWithGoogle(auth);
   //Github Auth
-  const [signInWithGithub] = useSignInWithGithub(auth);
+  const [signInWithGithub, gitUser, gitLoading] = useSignInWithGithub(auth);
   const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
 
@@ -31,7 +34,7 @@ const SingIn = () => {
     toast.success("Sing up successfull", { toastId: "omor" });
   }
 
-  if (signInLoading) {
+  if (signInLoading || authLoading || googleLoading || gitLoading) {
     return <Loading />;
   }
 
@@ -51,9 +54,13 @@ const SingIn = () => {
       toast.error("Input field required");
     }
   }
-  if (signInUser) {
+
+  console.log(user, googleUser, gitUser);
+
+  if (user || googleUser || gitUser) {
     return navigate("/");
   }
+
   return (
     <div>
       <div className="signin-container">
