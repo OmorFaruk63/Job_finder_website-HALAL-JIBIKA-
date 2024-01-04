@@ -9,7 +9,11 @@ const Error = () => {
     <div>
       <Navbar />
       <div className="error">
-        <h1>{error && error.message} this message for admin</h1>
+        <h1>
+          This is admin page, you don't need to understand the message of this
+          page, go back
+        </h1>
+        <h2>Error: {error && error.message} </h2>
         <button onClick={() => navigate(-1)}> Go Back</button>
       </div>
     </div>

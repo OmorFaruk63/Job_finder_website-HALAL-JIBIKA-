@@ -1,6 +1,15 @@
 .error {
+  text-align: center;
+}
+.error h1 {
+  font-size: 30px;
+  margin: auto;
+  margin-top: 40px;
   width: 400px;
-  margin: 50px auto;
+  text-align: justify;
+}
+.error h2 {
+  margin-top: 10px;
   color: red;
   text-align: center;
 }
