@@ -9,7 +9,7 @@ const NetworkErrorPage = ({ error }) => {
     <div className="network-error-page">
       <div className="error-message">
         <h2>Network Error</h2>
-        <p>{error.message}</p>
+        <p>{error?.message}</p>
       </div>
 
       <button className="reload-button" onClick={handleReload}>
