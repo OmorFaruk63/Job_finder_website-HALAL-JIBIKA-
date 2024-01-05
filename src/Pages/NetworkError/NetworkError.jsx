@@ -1,14 +1,17 @@
 import "./NetworkError.css";
 
-const NetworkErrorPage = () => {
+const NetworkErrorPage = ({ error }) => {
   const handleReload = () => {
-    // Implement your reload logic here
     window.location.reload();
   };
 
   return (
     <div className="network-error-page">
-      <div className="error-message">Network Error</div>
+      <div className="error-message">
+        <h2>Network Error</h2>
+        <p>{error.message}</p>
+      </div>
+
       <button className="reload-button" onClick={handleReload}>
         Reload
       </button>

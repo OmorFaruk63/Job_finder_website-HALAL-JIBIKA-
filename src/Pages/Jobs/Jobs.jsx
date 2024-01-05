@@ -31,7 +31,7 @@ const Jobs = () => {
   }, [data]);
 
   if (error) {
-    return <NetworkErrorPage />;
+    return <NetworkErrorPage error={error} />;
   }
 
   // Handling job deletion
