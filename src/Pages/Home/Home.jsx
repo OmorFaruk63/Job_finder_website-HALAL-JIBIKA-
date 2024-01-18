@@ -14,7 +14,9 @@ const Home = () => {
   // Navigation setup
   const navigate = useNavigate();
 
-  const { data, loading, error } = useFetch("http://localhost:9000/jobs");
+  const { data, loading, error } = useFetch(
+    "https://omor-service.onrender.com/jobs"
+  );
 
   if (error) {
     return <NetworkErrorPage />;

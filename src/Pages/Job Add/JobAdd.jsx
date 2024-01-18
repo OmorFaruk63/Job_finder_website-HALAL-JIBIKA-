@@ -16,7 +16,7 @@ const JobAdd = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:9000/jobs", data)
+      .post("https://omor-service.onrender.com/jobs", data)
       .then((res) => {
         toast.success("Job add successful.");
         navigate("/jobs");

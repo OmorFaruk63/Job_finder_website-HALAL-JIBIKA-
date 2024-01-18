@@ -23,7 +23,9 @@ const Jobs = () => {
   // Geting user authentication status
   const navigate = useNavigate();
 
-  const { data, loading, error } = useFetch("http://localhost:9000/jobs");
+  const { data, loading, error } = useFetch(
+    "https://omor-service.onrender.com/jobs"
+  );
   const [currentData, setCurrentData] = useState(data);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Jobs = () => {
   // Handling job deletion
   async function handleDeleteJob(id) {
     await axios
-      .delete(`http://localhost:9000/jobs/${id}`)
+      .delete(`https://omor-service.onrender.com/jobs/${id}`)
       .then((res) => toast.success("Delete Successful"))
       .catch((err) => toast.error(err.message));
     setCurrentData(currentData.filter((data) => data.id !== id));
@@ -47,7 +49,7 @@ const Jobs = () => {
   function handleFavorite(job) {
     const status = job.istrue === "undefined" ? false : !job.istrue;
     axios
-      .put(`http://localhost:9000/jobs/${job.id}`, {
+      .put(`https://omor-service.onrender.com/jobs/${job.id}`, {
         ...job,
         istrue: status,
       })

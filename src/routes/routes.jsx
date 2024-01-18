@@ -34,7 +34,9 @@ export const routes = createBrowserRouter([
         path: "/jobs/:id",
         element: <JobsDetails />,
         loader: async ({ params }) =>
-          await axios.get(`http://localhost:9000/jobs/${params.id}`),
+          await axios.get(
+            `https://omor-service.onrender.com/jobs/${params.id}`
+          ),
       },
       {
         path: "/jobAdd",

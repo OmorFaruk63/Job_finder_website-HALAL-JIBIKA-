@@ -37,7 +37,7 @@ const EditeJob = () => {
 
   const onSubmit = (data) => {
     axios
-      .put(`http://localhost:9000/jobs/${edit.id}`, data)
+      .put(`https://omor-service.onrender.com/jobs/${edit.id}`, data)
       .then((res) => {
         toast.success("Edite Successful");
         navigate(-1);

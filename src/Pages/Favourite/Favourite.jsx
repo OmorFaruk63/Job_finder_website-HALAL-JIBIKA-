@@ -11,7 +11,9 @@ import { auth } from "../../Firebase/Firebase";
 import NetworkErrorPage from "../NetworkError/NetworkError";
 
 const Favourite = () => {
-  const { data, loading, error } = useFetch("http://localhost:9000/jobs");
+  const { data, loading, error } = useFetch(
+    "https://omor-service.onrender.com/jobs"
+  );
   // Destructuring values from the context and state
   const [user, authLoading] = useAuthState(auth);
 
@@ -35,7 +37,7 @@ const Favourite = () => {
   // Handling job favoract
   function handleFavoriteDataRemove(job) {
     axios
-      .put(`http://localhost:9000/jobs/${job.id}`, {
+      .put(`https://omor-service.onrender.com/jobs/${job.id}`, {
         ...job,
         istrue: false,
       })

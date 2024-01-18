@@ -16,7 +16,7 @@ const JobApplication = () => {
   const onSubmit = () => {
     const status = state.isApplied === "undefined" ? false : !state.isApplied;
     axios
-      .put(`http://localhost:9000/jobs/${state.id}`, {
+      .put(`https://omor-service.onrender.com/jobs/${state.id}`, {
         ...state,
         isApplied: status,
       })

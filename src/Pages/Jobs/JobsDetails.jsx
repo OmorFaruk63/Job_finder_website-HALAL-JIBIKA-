@@ -14,7 +14,7 @@ const JobsDetails = () => {
 
   function handleApply(job) {
     axios
-      .put(`http://localhost:9000/jobs/${job.id}`, {
+      .put(`https://omor-service.onrender.com/jobs/${job.id}`, {
         ...job,
         isApplied: false,
       })
